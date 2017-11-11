@@ -8,9 +8,11 @@ package projeto;
 
 
 import java.awt.Frame;
+import java.awt.Graphics2D;
 import java.math.BigInteger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import org.jfree.data.xy.XYSeries;
 
 /**
  *
@@ -163,6 +165,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btGraficoAcumulada.setText("Gráfico função acumulada");
+        btGraficoAcumulada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGraficoAcumuladaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -256,16 +263,21 @@ public class Principal extends javax.swing.JFrame {
             populacao = txtPopulacao.getText();
             amostra = txtAmostra.getText();
             caracteristica = txtCaracteristica.getText();
+            
         
             if( populacao.equals("") || amostra.equals("") || caracteristica.equals("") ){
                 JOptionPane.showMessageDialog(null, "Tente novamente");
             } else {
-                BigInteger resultado = funcao.fatorial(Integer.parseInt(populacao));
-                txtResultado.setText("" + resultado);
+                funcao.preencheVetorProbabilidade(populacao, amostra, caracteristica);
+                double [] probabilidade = funcao.getProbabilidade();
+                Grafico grafico = new Grafico();
+                grafico.plotarGraficoProbabilidade(probabilidade, "Probabilidade");
             }
         } catch ( Exception e ) {
-            JOptionPane.showMessageDialog(null, "Tente novamente");
+            JOptionPane.showMessageDialog(null, "Valores inválidos, tente novamente");
         }
+        
+                
     }//GEN-LAST:event_btGraficoPropabilidadeActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -316,6 +328,26 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Valores inválidos. Tente novamente");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btGraficoAcumuladaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGraficoAcumuladaActionPerformed
+        
+        try {
+            populacao = txtPopulacao.getText();
+            amostra = txtAmostra.getText();
+            caracteristica = txtCaracteristica.getText();
+            
+            if( populacao.equals("") || amostra.equals("") || caracteristica.equals("") ){
+                JOptionPane.showMessageDialog(null, "Tente novamente");
+            } else {
+                funcao.preencheVetorAcumulada(populacao, amostra, caracteristica);
+                double [] probabilidade = funcao.getAcumulada();
+                Grafico grafico = new Grafico();
+                grafico.plotarGraficoProbabilidadeAcumulada(probabilidade, "Probabilidade Acumulada ");
+            }
+        } catch ( Exception e ) {
+            JOptionPane.showMessageDialog(null, "Valores inválidos, tente novamente");
+        }
+    }//GEN-LAST:event_btGraficoAcumuladaActionPerformed
 
     /**
      * @param args the command line arguments

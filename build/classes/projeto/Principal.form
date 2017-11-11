@@ -299,6 +299,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gr&#xe1;fico fun&#xe7;&#xe3;o acumulada"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btGraficoAcumuladaActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

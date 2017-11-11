@@ -61,12 +61,12 @@ public class Funcoes {
     }
     
     public double resultadoProbabilidadeAcumulada( int N, int n, int r, int x) {
-        preencheVetorProbabilidade(N,n,r,x);
-        preencheVetorAcumulada(N,n,r,x);
+        preencheVetorProbabilidade(N,n,r);
+        preencheVetorAcumulada(N,n,r);
         return acumulada[x];
     }
     
-    public void preencheVetorProbabilidade (int N, int n, int r, int x ) {
+    public void preencheVetorProbabilidade (int N, int n, int r ) {
         probabilidade = new double [r+1];
         for ( int i = 0; i < probabilidade.length; i ++ ) {
             probabilidade[i] = resultadoFormula(N,n,r,i);
@@ -74,13 +74,35 @@ public class Funcoes {
         }
     }
     
-    public void preencheVetorAcumulada(int N, int n, int r, int x) {
+    public void preencheVetorAcumulada(int N, int n, int r) {
         acumulada = new double [r+1];
         acumulada[0] = probabilidade[0];
         for ( int i = 1; i < acumulada.length; i ++ ) {
             acumulada[i] = acumulada[i-1] + probabilidade[i];
         }
         System.out.println();
+    }
+    
+    public void preencheVetorProbabilidade ( String populacao, String amostra, String caracteristica) {
+        int N = Integer.parseInt(populacao);
+        int n = Integer.parseInt(amostra);
+        int r = Integer.parseInt(caracteristica);
+        preencheVetorProbabilidade(N, n, r);
+    }
+    
+    public void preencheVetorAcumulada ( String populacao, String amostra, String caracteristica ) {
+        int N = Integer.parseInt(populacao);
+        int n = Integer.parseInt(amostra);
+        int r = Integer.parseInt(caracteristica);
+        preencheVetorAcumulada(N, n, r);
+    }
+    
+    public double[] getProbabilidade () {
+        return probabilidade;
+    }
+    
+    public double[] getAcumulada () {
+        return acumulada;
     }
     
 }
