@@ -82,9 +82,9 @@ public class Grafico {
         renderer.setSeriesLinesVisible(0, false);
         plot.setRenderer(renderer);
         
-        ChartFrame frame = new ChartFrame(nome, grafico);
+        /*ChartFrame frame = new ChartFrame(nome, grafico);
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(true);*/
     }
     
     public void plotarGraficoProbabilidadeAcumulada ( double[] vetor, String nome) {
@@ -92,16 +92,30 @@ public class Grafico {
         series = new XYSeries (nome);
         
         for (int i = 0; i < vetor.length; i++) {
-            series.add((double) i, vetor[i]);
+            double j = i;
+            while ( j < (i + 1)) {
+                series.add(j, vetor[i]);
+                j += 0.001;
+            }
+            //series.add((double) i, vetor[i]);
         }
 
         dataset = new XYSeriesCollection(series);
         grafico = ChartFactory.createXYBarChart(nome, "X",false, "F(X)", dataset, PlotOrientation.VERTICAL, false, false, false);
         
-        ChartFrame frame = new ChartFrame(nome, grafico);
-        frame.pack();
-        frame.setVisible(true);
+        XYPlot plot = grafico.getXYPlot();
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesLinesVisible(0, false);
+        plot.setRenderer(renderer);
         
+        /*ChartFrame frame = new ChartFrame(nome, grafico);
+        frame.pack();
+        frame.setVisible(true);*/
+        
+    }
+    
+    public JFreeChart getChart ( ) {
+        return grafico;
     }
     
     

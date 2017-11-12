@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.math.BigInteger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import org.jfree.chart.ChartPanel;
 import org.jfree.data.xy.XYSeries;
 
 /**
@@ -42,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        panelSul = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtPonto = new javax.swing.JTextField();
@@ -74,14 +75,14 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trabalho de Estatística");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelSulLayout = new javax.swing.GroupLayout(panelSul);
+        panelSul.setLayout(panelSulLayout);
+        panelSulLayout.setHorizontalGroup(
+            panelSulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelSulLayout.setVerticalGroup(
+            panelSulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 232, Short.MAX_VALUE)
         );
 
@@ -226,7 +227,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 23, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelSul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -237,7 +238,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelSul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -272,6 +273,7 @@ public class Principal extends javax.swing.JFrame {
                 double [] probabilidade = funcao.getProbabilidade();
                 Grafico grafico = new Grafico();
                 grafico.plotarGraficoProbabilidade(probabilidade, "Probabilidade");
+                plotarGrafico(grafico);
             }
         } catch ( Exception e ) {
             JOptionPane.showMessageDialog(null, "Valores inválidos, tente novamente");
@@ -343,6 +345,7 @@ public class Principal extends javax.swing.JFrame {
                 double [] probabilidade = funcao.getAcumulada();
                 Grafico grafico = new Grafico();
                 grafico.plotarGraficoProbabilidadeAcumulada(probabilidade, "Probabilidade Acumulada ");
+                plotarGrafico(grafico);
             }
         } catch ( Exception e ) {
             JOptionPane.showMessageDialog(null, "Valores inválidos, tente novamente");
@@ -375,6 +378,16 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void plotarGrafico ( Grafico grafico ) {
+        ChartPanel myChartPanel = new ChartPanel(grafico.getChart(), true);
+	myChartPanel.setSize(panelSul.getWidth(), panelSul.getHeight());
+	myChartPanel.setVisible(true);
+	panelSul.removeAll();
+	panelSul.add(myChartPanel);
+	panelSul.revalidate();
+	panelSul.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btGraficoAcumulada;
@@ -387,10 +400,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel panelSul;
     private javax.swing.JTextField txtAmostra;
     private javax.swing.JTextField txtCaracteristica;
     private javax.swing.JTextField txtPonto;

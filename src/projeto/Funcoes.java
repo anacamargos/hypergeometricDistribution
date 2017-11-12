@@ -94,6 +94,7 @@ public class Funcoes {
         int N = Integer.parseInt(populacao);
         int n = Integer.parseInt(amostra);
         int r = Integer.parseInt(caracteristica);
+        preencheVetorProbabilidade(N, n, r);
         preencheVetorAcumulada(N, n, r);
     }
     
