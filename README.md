@@ -1,2 +1,2 @@
-# hypergeometricDistribution
-Trabalho para a disciplina de Estatística e Probabilidade
+# Hypergeometric Distribution
+Project developed for the discipline of Statistics and Probability
